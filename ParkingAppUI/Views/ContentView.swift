@@ -45,7 +45,7 @@ struct ContentView: View {
         }
         .onAppear {
             var test = Manager()
-            test.dotask()
+            test.doTask(longitude: 50.4560705, latitude: 30.4099772, radius: 1500)
             parkingFinder.selectedPlace = parkingFinder.spots[0]
         }
     }
