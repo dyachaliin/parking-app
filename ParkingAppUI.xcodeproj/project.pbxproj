@@ -26,6 +26,7 @@
 		3E9A60EC26CE6ECF003F5939 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A60EB26CE6ECF003F5939 /* PaymentView.swift */; };
 		3E9A60EF26CE6F20003F5939 /* ParkingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A60EE26CE6F20003F5939 /* ParkingItem.swift */; };
 		3E9A60F126CE6F42003F5939 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A60F026CE6F42003F5939 /* DataModel.swift */; };
+		5D9D80222782F6DA00B85253 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9D80212782F6DA00B85253 /* Manager.swift */; };
 		5D9D8024278307B300B85253 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D9D8023278307B300B85253 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		3E9A60EB26CE6ECF003F5939 /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		3E9A60EE26CE6F20003F5939 /* ParkingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingItem.swift; sourceTree = "<group>"; };
 		3E9A60F026CE6F42003F5939 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		5D9D80212782F6DA00B85253 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		5D9D8023278307B300B85253 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,6 +86,7 @@
 		3E9A60BD26CE6974003F5939 /* ParkingAppUI */ = {
 			isa = PBXGroup;
 			children = (
+				5D9D80202782F6B800B85253 /* Managers */,
 				3E9A60ED26CE6F07003F5939 /* Models */,
 				3E9A60D526CE6AA9003F5939 /* Views */,
 				3E9A60D026CE6A0D003F5939 /* Extensions */,
@@ -165,6 +168,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		5D9D80202782F6B800B85253 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				5D9D80212782F6DA00B85253 /* Manager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -242,6 +253,7 @@
 				3E9A60DE26CE6BA2003F5939 /* TopNavigationView.swift in Sources */,
 				3E9A60EA26CE6E91003F5939 /* InfoItemView.swift in Sources */,
 				3E9A60C126CE6974003F5939 /* ContentView.swift in Sources */,
+				5D9D80222782F6DA00B85253 /* Manager.swift in Sources */,
 				3E9A60EF26CE6F20003F5939 /* ParkingItem.swift in Sources */,
 				3E9A60E126CE6C2E003F5939 /* HourChangeView.swift in Sources */,
 				3E9A60DA26CE6B1E003F5939 /* SearchView.swift in Sources */,

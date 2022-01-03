@@ -44,6 +44,8 @@ struct ContentView: View {
             }
         }
         .onAppear {
+            var test = Manager()
+            test.dotask()
             parkingFinder.selectedPlace = parkingFinder.spots[0]
         }
     }
