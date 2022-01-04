@@ -1,21 +1,31 @@
 import SwiftUI
 import MapKit
-
+class Constants{
+    static let foundLogitude = 50.4560705
+    static let foundLatitude = 30.4099772
+    static let foundRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: foundLogitude, longitude: foundLatitude), span: MKCoordinateSpan(latitudeDelta: 0.007, longitudeDelta: 0.007))
+}
 struct ContentView: View {
+    let test = Manager()
+    @State var region = Constants.foundRegion
+    @StateObject var parkingFinder1 = ParkingFinder1()
     
-    @StateObject var parkingFinder = ParkingFinder()
     @State var placesOfClosure: [Result] = []
+    
+    @State var result: Result?
+    
     var body: some View {
         ZStack(alignment: .top) {
             // background
             Color.white.ignoresSafeArea()
             // map view
-            Map(coordinateRegion: $parkingFinder.region, annotationItems: parkingFinder.spots) { spot in
-                MapAnnotation(coordinate: spot.location, anchorPoint: CGPoint(x: 0.5, y: 0.5)) {
+            Map(coordinateRegion: $region, annotationItems: placesOfClosure) { spot in
+                MapAnnotation(coordinate: CLLocationCoordinate2D(latitude:  spot.geometry.location.lat, longitude:  spot.geometry.location.lng)
+, anchorPoint: CGPoint(x: 0.5, y: 0.5)) {
                     Button(action: {
-                        parkingFinder.selectedPlace = spot
+                        parkingFinder1.selectedPlace = spot
                     }, label: {
-                        SpotAnnotatonView(fee: "\(Int(spot.fee))", selected: spot.id == parkingFinder.selectedPlace?.id)
+                        SpotAnnotatonView(fee: "\(Int(spot.fee ?? 0.0))", selected: spot.id == parkingFinder1.selectedPlace?.id)
                     })
                 }
             }
@@ -30,29 +40,28 @@ struct ContentView: View {
                 TopNavigationView()
                 Spacer()
                 // parking card view
-                ParkingCardView(parkingPlace: parkingFinder.selectedPlace ?? parkingFinder.spots[0])
+                ParkingCardView(parkingPlace: parkingFinder1.selectedPlace)
                     .offset(y: -25)
                     .onTapGesture {
-                        parkingFinder.showDetail = true
+                        parkingFinder1.showDetail = true
                     }
                 // search view
                 SearchView()
             }
             .padding(.horizontal)
-                    
-            if parkingFinder.showDetail {
+            if parkingFinder1.showDetail {
                 // parking detail view when click on card
-                ParkingDetailView(parkingFinder: parkingFinder, region: MKCoordinateRegion(center: parkingFinder.selectedPlace?.location ?? parkingFinder.spots[0].location, span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)))
+           ParkingDetailView(parkingFinder1: parkingFinder1, region: MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: parkingFinder1.selectedPlace!.geometry.location.lat, longitude: parkingFinder1.selectedPlace!.geometry.location.lng) , span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)))
             }
         }
         .onAppear {
-            var test = Manager()
-            test.doTask(longitude: 50.4560705, latitude: 30.4099772, radius: 1500, onSuccess: { placesResult in
-                self.placesOfClosure = placesResult!.results
+            test.doTask(longitude: Constants.foundLogitude, latitude: Constants.foundLatitude, radius: 1500, onSuccess: { results in
+                self.placesOfClosure = results
+                print("")
             }, onFailure: {error in
-                
+                print(error)
             })
-            parkingFinder.selectedPlace = parkingFinder.spots[0]
+//            parkingFinder1.selectedPlace = parkingFinder1.spots![0]
         }
     }
 }

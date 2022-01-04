@@ -2,29 +2,29 @@ import SwiftUI
 
 struct ParkingCardView: View {
     
-    let parkingPlace: ParkingItem
+    let parkingPlace: Result?
     
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 8) {
-                Text(parkingPlace.name)
+                Text(parkingPlace?.name ?? "")
                     .font(.system(size: 18, weight: .bold))
                     .foregroundColor(.darkColor)
                 
-                Text(parkingPlace.address)
+                Text(parkingPlace?.vicinity ?? "")
                     .font(.system(size: 14))
                     .foregroundColor(.gray)
                     .padding(.bottom, 20)
                 
                 HStack {
                     Image(systemName: "car.fill").foregroundColor(.gray)
-                    Text("\(parkingPlace.carLimit)")
+                    Text("\(parkingPlace?.carLimit ?? 0)")
                     Image(systemName: "dollarsign.circle.fill").foregroundColor(.gray)
-                    Text("$\(String.init(format: "%0.2f", parkingPlace.fee))/h")
+                    Text("$\(String.init(format: "%0.2f", parkingPlace?.fee ?? 0))/h")
                 }
             }
             Spacer()
-            Image(parkingPlace.photoName)
+            Image(parkingPlace?.icon ?? "")
                 .resizable()
                 .frame(width: 80, height: 80)
                 .scaledToFit()

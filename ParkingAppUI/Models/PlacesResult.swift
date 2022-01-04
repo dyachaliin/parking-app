@@ -7,22 +7,14 @@
 
 import Foundation
 import CoreGraphics
+import MapKit
+
 // MARK: - PlacesResult
 struct PlacesResult: Codable {
     let htmlAttributions: [JSONAny]
     let results: [Result]
     let status: String
-    
-    //    let id = UUID()
-    //    let name: String
-    //    let address: String
-    //    let photoName: String
-    //    let place: String
-    //    let carLimit: Int
-    //    let location: CLLocationCoordinate2D
-    //    let fee: CGFloat
-    //    var hour: String
-    
+
     enum CodingKeys: String, CodingKey {
         case htmlAttributions = "html_attributions"
         case results, status
@@ -30,24 +22,28 @@ struct PlacesResult: Codable {
 }
 
 // MARK: - Result
-struct Result: Codable {
+struct Result: Codable, Identifiable {
     let businessStatus: String
     let geometry: Geometry
     let icon: String
     let iconBackgroundColor: String
     let iconMaskBaseURI: String
     let name, placeID: String
+    
+    let id = UUID()
+    
     let plusCode: PlusCode
     let rating: Double
     let reference, scope: String
     let types: [TypeElement]
     let userRatingsTotal: Int
     let vicinity: String
+    //MARK: custom variables, didn't come from network
     let photos: [Photo]?
     let openingHours: OpeningHours?
-    let carLimit: Int
-    let fee: CGFloat
-    var hour: String
+    let carLimit: Int?
+    let fee: CGFloat?
+    var hour: String?
     enum CodingKeys: String, CodingKey {
         case businessStatus = "business_status"
         case geometry, icon
@@ -63,6 +59,7 @@ struct Result: Codable {
         case carLimit
         case hour
         case fee
+        case id
     }
 }
 
@@ -74,7 +71,8 @@ struct Geometry: Codable {
 
 // MARK: - Location
 struct Location: Codable {
-    let lat, lng: Double
+    let lat: Double
+    let lng: Double
 }
 
 // MARK: - Viewport
