@@ -4,7 +4,7 @@ import MapKit
 struct ContentView: View {
     
     @StateObject var parkingFinder = ParkingFinder()
-    
+    @State var placesOfClosure: [Result] = []
     var body: some View {
         ZStack(alignment: .top) {
             // background
@@ -25,6 +25,8 @@ struct ContentView: View {
                     
             VStack {
                 // top navigation
+                
+                Text("Receive element lenght:\(placesOfClosure.count)")
                 TopNavigationView()
                 Spacer()
                 // parking card view
@@ -45,7 +47,11 @@ struct ContentView: View {
         }
         .onAppear {
             var test = Manager()
-            test.doTask(longitude: 50.4560705, latitude: 30.4099772, radius: 1500)
+            test.doTask(longitude: 50.4560705, latitude: 30.4099772, radius: 1500, onSuccess: { placesResult in
+                self.placesOfClosure = placesResult!.results
+            }, onFailure: {error in
+                
+            })
             parkingFinder.selectedPlace = parkingFinder.spots[0]
         }
     }
