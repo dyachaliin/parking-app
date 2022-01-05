@@ -28,6 +28,7 @@
 		3E9A60F126CE6F42003F5939 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A60F026CE6F42003F5939 /* DataModel.swift */; };
 		5D9D80222782F6DA00B85253 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9D80212782F6DA00B85253 /* Manager.swift */; };
 		5D9D8024278307B300B85253 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D9D8023278307B300B85253 /* Images.xcassets */; };
+		5DC386A52785CB070012C000 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC386A42785CB070012C000 /* BlurView.swift */; };
 		5DC3926927833539002F2E6F /* PlacesResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC3926827833539002F2E6F /* PlacesResult.swift */; };
 		AE37A114B0A3C5CA13D18EF0 /* Pods_ParkingAppUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ABFADC29FF19247C68E2BB5 /* Pods_ParkingAppUI.framework */; };
 /* End PBXBuildFile section */
@@ -56,6 +57,7 @@
 		3E9A60F026CE6F42003F5939 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		5D9D80212782F6DA00B85253 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		5D9D8023278307B300B85253 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		5DC386A42785CB070012C000 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		5DC3926827833539002F2E6F /* PlacesResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesResult.swift; sourceTree = "<group>"; };
 		8ABFADC29FF19247C68E2BB5 /* Pods_ParkingAppUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ParkingAppUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEABC53A2A929507D78E676E /* Pods-ParkingAppUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkingAppUI.debug.xcconfig"; path = "Target Support Files/Pods-ParkingAppUI/Pods-ParkingAppUI.debug.xcconfig"; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				3E9A60D926CE6B1E003F5939 /* SearchView.swift */,
 				3E9A60DB26CE6B5B003F5939 /* SpotAnnotatonView.swift */,
 				3E9A60DD26CE6BA2003F5939 /* TopNavigationView.swift */,
+				5DC386A42785CB070012C000 /* BlurView.swift */,
 			);
 			path = MainViews;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				3E9A60DC26CE6B5B003F5939 /* SpotAnnotatonView.swift in Sources */,
 				3E9A60D226CE6A24003F5939 /* Color+Extension.swift in Sources */,
 				3E9A60F126CE6F42003F5939 /* DataModel.swift in Sources */,
+				5DC386A52785CB070012C000 /* BlurView.swift in Sources */,
 				3E9A60EC26CE6ECF003F5939 /* PaymentView.swift in Sources */,
 				3E9A60D826CE6AC9003F5939 /* ParkingCardView.swift in Sources */,
 			);

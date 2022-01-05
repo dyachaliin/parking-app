@@ -23,12 +23,15 @@ struct HourSliderView: View {
     }
     
     var body: some View {
+        //TODO:
         ZStack(alignment: .leading) {
             HStack(alignment: .bottom) {
+                //TODO:
                 ForEach(Array(stride(from: 0, to: 12, by: 1)), id: \.self) { i in
                     Rectangle()
                         .fill(Color.gray)
                         .frame(width: 2, height: i%2 == 0 ? 9 : 5)
+                    //TODO: why its for?
                     if i != 11 {
                         Spacer()
                     }
@@ -55,6 +58,7 @@ struct HourSliderView: View {
     }
         
     func calculateProgressWidth(xLocation: CGFloat) {
+        //TODO: marks here
         let tempProgress = xLocation/width
         if tempProgress >= 0 && tempProgress <= 1 {
             let roundedProgress = (tempProgress * (sliderConfig.maximumValue - sliderConfig.minimumValue)) + sliderConfig.minimumValue
@@ -66,6 +70,7 @@ struct HourSliderView: View {
     }
         
     func calculateStep(xLocation: CGFloat) {
+        //TODO: marks here, for better understanding
         let tempProgress = xLocation/width
         if tempProgress >= 0 && tempProgress <= 1 {
             let roundedProgress = (tempProgress * (sliderConfig.maximumValue - sliderConfig.minimumValue)) + sliderConfig.minimumValue
@@ -76,7 +81,7 @@ struct HourSliderView: View {
         }
     }
 }
-
+//TODO: move to constant
 struct HourSliderConfig {
     let minimumValue: CGFloat = 0.0
     let maximumValue: CGFloat = 12.0

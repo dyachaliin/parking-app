@@ -8,6 +8,7 @@ struct HourChangeView: View {
     var body: some View {
         ZStack {
             Color.black.opacity(0.1).ignoresSafeArea()
+            //TODO: why we should use this widget
             GeometryReader { geometry in
                 VStack {
                     Text("Choose Hour(max: 6hour)").foregroundColor(.darkColor)
