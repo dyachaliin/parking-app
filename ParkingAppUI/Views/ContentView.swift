@@ -6,7 +6,6 @@ class Constants{
     static let foundRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: foundLogitude, longitude: foundLatitude), span: MKCoordinateSpan(latitudeDelta: 0.007, longitudeDelta: 0.007))
 }
 
-//TODO: ALL VERIALBLES SHOULD BE MOVED TO ONE OBSERVSBLE OBJECT
 class ContentViewController: ObservableObject {
     let networkManager = NetworkManager()
     
@@ -14,22 +13,14 @@ class ContentViewController: ObservableObject {
     @Published var region = Constants.foundRegion
     @Published var placesOfClosure: [Result] = []
     @Published var result: Result?
+    @Published var isDisplayed = false
     
 }
 struct ContentView: View {
     
     @EnvironmentObject var controller: ContentViewController
     @EnvironmentObject var parkingFinder: ParkingFinder
-    //    @State var isLoading = false
-    //
-    //    @State var region = Constants.foundRegion
-    //    @StateObject var parkingFinder1 = ParkingFinder1()
-    //    //TODO: how to setup initial value
-    //    @State var placesOfClosure: [Result] = []
-    //
-    //    @State var result: Result?
-    
-    
+
     var body: some View {
         GeometryReader{ geometry in
             ZStack(alignment: .top) {
@@ -85,11 +76,12 @@ struct ContentView: View {
                 print("")
             }, onFailure: {error in
                 controller.isLoading = false
-                //TODO: show error alert for user
-                print(error)
+                controller.isDisplayed = true
             })
         }
-        
+        .alert(isPresented: $controller.isDisplayed) {
+            Alert(title: Text("Error"), message: Text("Downloading data is failed"), dismissButton: .default(Text("Ok")))
+        }
     }
     
     var bottomCardView: some View {
@@ -109,7 +101,9 @@ struct ContentView: View {
         }
         .padding(.horizontal)
     }
+    
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
