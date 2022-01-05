@@ -3,7 +3,7 @@ import MapKit
 
 struct ParkingDetailView: View {
     
-    @ObservedObject var parkingFinder1: ParkingFinder1
+    @ObservedObject var parkingFinder1: ParkingFinder
     @State var region: MKCoordinateRegion
     @State var showHourSelectionView = false
     @State var selectedHour: CGFloat = 0.0

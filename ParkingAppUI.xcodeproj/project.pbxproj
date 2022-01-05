@@ -26,7 +26,7 @@
 		3E9A60EC26CE6ECF003F5939 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A60EB26CE6ECF003F5939 /* PaymentView.swift */; };
 		3E9A60EF26CE6F20003F5939 /* ParkingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A60EE26CE6F20003F5939 /* ParkingItem.swift */; };
 		3E9A60F126CE6F42003F5939 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A60F026CE6F42003F5939 /* DataModel.swift */; };
-		5D9D80222782F6DA00B85253 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9D80212782F6DA00B85253 /* Manager.swift */; };
+		5D9D80222782F6DA00B85253 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9D80212782F6DA00B85253 /* NetworkManager.swift */; };
 		5D9D8024278307B300B85253 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D9D8023278307B300B85253 /* Images.xcassets */; };
 		5DC386A52785CB070012C000 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC386A42785CB070012C000 /* BlurView.swift */; };
 		5DC3926927833539002F2E6F /* PlacesResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC3926827833539002F2E6F /* PlacesResult.swift */; };
@@ -55,7 +55,7 @@
 		3E9A60EB26CE6ECF003F5939 /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		3E9A60EE26CE6F20003F5939 /* ParkingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingItem.swift; sourceTree = "<group>"; };
 		3E9A60F026CE6F42003F5939 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
-		5D9D80212782F6DA00B85253 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
+		5D9D80212782F6DA00B85253 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5D9D8023278307B300B85253 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5DC386A42785CB070012C000 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		5DC3926827833539002F2E6F /* PlacesResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesResult.swift; sourceTree = "<group>"; };
@@ -192,7 +192,7 @@
 		5D9D80202782F6B800B85253 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				5D9D80212782F6DA00B85253 /* Manager.swift */,
+				5D9D80212782F6DA00B85253 /* NetworkManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -328,7 +328,7 @@
 				3E9A60EA26CE6E91003F5939 /* InfoItemView.swift in Sources */,
 				5DC3926927833539002F2E6F /* PlacesResult.swift in Sources */,
 				3E9A60C126CE6974003F5939 /* ContentView.swift in Sources */,
-				5D9D80222782F6DA00B85253 /* Manager.swift in Sources */,
+				5D9D80222782F6DA00B85253 /* NetworkManager.swift in Sources */,
 				3E9A60EF26CE6F20003F5939 /* ParkingItem.swift in Sources */,
 				3E9A60E126CE6C2E003F5939 /* HourChangeView.swift in Sources */,
 				3E9A60DA26CE6B1E003F5939 /* SearchView.swift in Sources */,

@@ -27,7 +27,7 @@ struct ParkingInfoView: View {
             }.font(.system(size: 16))
             
             HStack(spacing: 10) {
-                InfoItemView(imageName: "place", value: randomString(), title: "Parking Place")
+                InfoItemView(imageName: "place", value: parkingItem?.name ?? "", title: "Parking Place")
                 
                 InfoItemView(imageName: "cost", value: getHour(), title: "Time")
                     .onTapGesture {
