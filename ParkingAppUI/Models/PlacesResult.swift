@@ -21,6 +21,8 @@ struct PlacesResult: Codable {
     }
 }
 
+
+
 // MARK: - Result
 struct Result: Codable, Identifiable {
     let businessStatus: String
@@ -29,21 +31,24 @@ struct Result: Codable, Identifiable {
     let iconBackgroundColor: String
     let iconMaskBaseURI: String
     let name, placeID: String
-    
-    let id = UUID()
-    
     let plusCode: PlusCode
     let rating: Double
     let reference, scope: String
     let types: [TypeElement]
     let userRatingsTotal: Int
     let vicinity: String
-    //MARK: custom variables, didn't come from network
     let photos: [Photo]?
     let openingHours: OpeningHours?
-    let carLimit: Int?
-    let fee: CGFloat?
+    //MARK: custom variables, didn't come from network
+    var carLimit: Int?
+//    mutating func setCarLimit(limit: Int){
+//        self.carLimit = limit
+//    }
+    var fee: CGFloat?
     var hour: String?
+    let id = UUID()
+    
+     
     enum CodingKeys: String, CodingKey {
         case businessStatus = "business_status"
         case geometry, icon

@@ -3,7 +3,7 @@ import MapKit
 class Constants{
     static let foundLogitude = 50.4560705
     static let foundLatitude = 30.4099772
-    static let foundRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: foundLogitude, longitude: foundLatitude), span: MKCoordinateSpan(latitudeDelta: 0.007, longitudeDelta: 0.007))
+    static let foundRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: foundLogitude, longitude: foundLatitude), span: MKCoordinateSpan(latitudeDelta: 0.07, longitudeDelta: 0.07))
 }
 
 class ContentViewController: ObservableObject {
@@ -13,7 +13,7 @@ class ContentViewController: ObservableObject {
     @Published var region = Constants.foundRegion
     @Published var placesOfClosure: [Result] = []
     @Published var result: Result?
-    @Published var isDisplayed = false
+    @Published var failedDownloading = false
     
 }
 struct ContentView: View {
@@ -25,16 +25,17 @@ struct ContentView: View {
         GeometryReader{ geometry in
             ZStack(alignment: .top) {
                 // background
-                Color.white.ignoresSafeArea()
+                Color.accentColor.ignoresSafeArea()
                 // map view
                 Map(coordinateRegion: $controller.region, annotationItems: controller.placesOfClosure) { spot in
                     MapAnnotation(coordinate: CLLocationCoordinate2D(latitude:  spot.geometry.location.lat, longitude:  spot.geometry.location.lng)
-                                  //TODO: what is the anchor point?
                                   , anchorPoint: CGPoint(x: 0.5, y: 0.5)) {
                         Button(action: {
                             parkingFinder.selectedPlace = spot
                         }, label: {
+                            
                             SpotAnnotatonView(fee: "\(Int(spot.fee ?? 0.0))", selected: spot.id == parkingFinder.selectedPlace?.id)
+
                         })
                     }
                 }
@@ -42,15 +43,17 @@ struct ContentView: View {
                 .cornerRadius(40)
                 .edgesIgnoringSafeArea(.top)
                 .offset(y: -70)
+                if parkingFinder.selectedPlace != nil {
+                    bottomCardView
+//                        .animation()
+                }
                 
-                bottomCardView
-                
-                //TODO: should be hendled
                 if parkingFinder.showDetail {
                     // parking detail view when click on card
-                    ParkingDetailView(parkingFinder1: parkingFinder, region: MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: parkingFinder.selectedPlace!.geometry.location.lat, longitude: parkingFinder.selectedPlace!.geometry.location.lng) , span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)))
+                    ParkingDetailView(parkingFinder: parkingFinder, region: MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: parkingFinder.selectedPlace!.geometry.location.lat, longitude: parkingFinder.selectedPlace!.geometry.location.lng) , span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)))
                 }
                 if controller.isLoading {
+                    
                     Group{
                         
                         BlurView(style: .dark)
@@ -68,20 +71,26 @@ struct ContentView: View {
             
         }
         .onAppear {
+            
             controller.isLoading = true
             controller.networkManager.doTask(longitude: Constants.foundLogitude, latitude: Constants.foundLatitude, radius: 1500, onSuccess: { results in
+                let temp: [Result] = results.map({ m in
+                    var el = m
+                    el.carLimit = Int.random(in: 10...45)
+                    el.fee = CGFloat.random(in: 1...5)
+                    return el
+                })
                 controller.isLoading = false
-                controller.placesOfClosure = results
-                //TODO: show succes for user
-                print("")
+                controller.placesOfClosure = temp
             }, onFailure: {error in
                 controller.isLoading = false
-                controller.isDisplayed = true
+                controller.failedDownloading = true
             })
         }
-        .alert(isPresented: $controller.isDisplayed) {
+        .alert(isPresented: $controller.failedDownloading) {
             Alert(title: Text("Error"), message: Text("Downloading data is failed"), dismissButton: .default(Text("Ok")))
         }
+        
     }
     
     var bottomCardView: some View {

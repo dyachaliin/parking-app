@@ -17,7 +17,6 @@ struct ParkingCardView: View {
                     .padding(.bottom, 20)
                 
                 HStack {
-                    //TODO: from where we got this images?
                     Image(systemName: "car.fill").foregroundColor(.gray)
                     Text("\(parkingFinder.selectedPlace?.carLimit ?? 0)")
                     Image(systemName: "dollarsign.circle.fill").foregroundColor(.gray)

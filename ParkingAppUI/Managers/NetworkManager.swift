@@ -7,9 +7,9 @@ class NetworkManager {
         
         let key = "AIzaSyC-6F4go5xJJmNM8_mL_Ihww6ORS6NF0lo"
         let urlPath = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(longitude)%2C\(latitude)&radius=\(radius)&type=parking&keyword=parking&key=\(key)"
-        let urlPath1 = "https://uas-api.inrix.com/v1/appToken?appId=zkxa7tgn90&hashToken=emt4YTd0Z245MHxseHEyNGsyVkJJMjlEemNwQlQ3bmQ1NVEzRzFqZmZNNzM1TG9tbTMy"
-        AF.request(urlPath1).responseDecodable(of: PlacesResult.self) { responseJSON in
-            guard let statusCode = responseJSON.response?.statusCode, (responseJSON.error==nil) else {
+       // let urlPath1 = "https://uas-api.inrix.com/v1/appToken?appId=zkxa7tgn90&hashToken=emt4YTd0Z245MHxseHEyNGsyVkJJMjlEemNwQlQ3bmQ1NVEzRzFqZmZNNzM1TG9tbTMy"
+        AF.request(urlPath).responseDecodable(of: PlacesResult.self) { responseJSON in
+            guard let statusCode = responseJSON.response?.statusCode, (responseJSON.error == nil) else {
                 onFailure("dwdwdadwadawd")
                 return
                 
@@ -28,8 +28,8 @@ class NetworkManager {
                 onFailure("|32323232")
                 
             }
-            
         }
+        
     }
     
 }

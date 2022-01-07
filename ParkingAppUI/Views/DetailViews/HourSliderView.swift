@@ -1,10 +1,16 @@
 import SwiftUI
 
+struct HourSliderConfig {
+    let minimumValue: CGFloat = 0.0
+    let maximumValue: CGFloat = 12.0
+    let sliderRadius: CGFloat = 22.0
+}
+
 struct HourSliderView: View {
     
     @Binding var progress: CGFloat
     @Binding var showHourSlider: Bool
-    @State var knobPosition: CGFloat = 0.0
+    @State var sliderPosition: CGFloat = 0.0
     
     let sliderConfig = HourSliderConfig()
     let width: CGFloat
@@ -23,15 +29,12 @@ struct HourSliderView: View {
     }
     
     var body: some View {
-        //TODO:
         ZStack(alignment: .leading) {
             HStack(alignment: .bottom) {
-                //TODO:
-                ForEach(Array(stride(from: 0, to: 12, by: 1)), id: \.self) { i in
+                ForEach(0..<12) { i in
                     Rectangle()
                         .fill(Color.gray)
                         .frame(width: 2, height: i%2 == 0 ? 9 : 5)
-                    //TODO: why its for?
                     if i != 11 {
                         Spacer()
                     }
@@ -40,50 +43,46 @@ struct HourSliderView: View {
                 
             RoundedRectangle(cornerRadius: 5)
                 .fill(Color.black)
-                .frame(width: knobPosition, height: 9)
+                .frame(width: sliderPosition, height: 9)
                 
             Circle()
                 .fill(Color.black)
                 .frame(width: 26, height: 26)
                 .padding(12)
                 .offset(x: -22)
-                .offset(x: knobPosition)
+                .offset(x: sliderPosition)
                 .gesture(dragGesture)
         }
     }
     
-    func calculateInitialKnobPosition() {
+    func calculateInitialSliderPosition() {
         progress = sliderConfig.minimumValue
-        knobPosition = (progress * width) - knobPosition
+        sliderPosition = (progress * width) - sliderPosition
     }
         
     func calculateProgressWidth(xLocation: CGFloat) {
-        //TODO: marks here
+        //MARK: calculate progress width
         let tempProgress = xLocation/width
         if tempProgress >= 0 && tempProgress <= 1 {
             let roundedProgress = (tempProgress * (sliderConfig.maximumValue - sliderConfig.minimumValue)) + sliderConfig.minimumValue
             progress = roundedProgress.rounded()
                 
-            let tempPosition = (tempProgress * width) - sliderConfig.knobRadius
-            knobPosition = tempPosition > 0 ? tempPosition : 0
+            let tempPosition = (tempProgress * width) - sliderConfig.sliderRadius
+            sliderPosition = tempPosition > 0 ? tempPosition : 0
         }
     }
         
     func calculateStep(xLocation: CGFloat) {
-        //TODO: marks here, for better understanding
+        //MARK: calculate step
         let tempProgress = xLocation/width
         if tempProgress >= 0 && tempProgress <= 1 {
             let roundedProgress = (tempProgress * (sliderConfig.maximumValue - sliderConfig.minimumValue)) + sliderConfig.minimumValue
             progress = roundedProgress.rounded()
                 
             let updatedTempProgress = (roundedProgress - sliderConfig.minimumValue) / (sliderConfig.maximumValue - sliderConfig.minimumValue)
-            knobPosition = updatedTempProgress == 0 ? 0 : (updatedTempProgress * width) - sliderConfig.knobRadius
+            sliderPosition = updatedTempProgress == 0 ? 0 : (updatedTempProgress * width) - sliderConfig.sliderRadius
         }
     }
 }
-//TODO: move to constant
-struct HourSliderConfig {
-    let minimumValue: CGFloat = 0.0
-    let maximumValue: CGFloat = 12.0
-    let knobRadius: CGFloat = 22.0
-}
+
+

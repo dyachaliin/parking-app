@@ -3,7 +3,7 @@ import MapKit
 
 struct ParkingDetailView: View {
     
-    @ObservedObject var parkingFinder1: ParkingFinder
+    @ObservedObject var parkingFinder: ParkingFinder
     @State var region: MKCoordinateRegion
     @State var showHourSelectionView = false
     @State var selectedHour: CGFloat = 0.0
@@ -39,7 +39,7 @@ struct ParkingDetailView: View {
                     )
                     .gesture(dragGesture)
                     
-                Map(coordinateRegion: $region, annotationItems: [parkingFinder1.selectedPlace!]) { spot in
+                Map(coordinateRegion: $region, annotationItems: [parkingFinder.selectedPlace!]) { spot in
                     MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: spot!.geometry.location.lat, longitude: spot!.geometry.location.lat) , anchorPoint: CGPoint(x: 0.5, y: 0.5)) {
                         SpotAnnotatonView(fee: "", selected: true)
                     }
@@ -49,9 +49,9 @@ struct ParkingDetailView: View {
                 .padding(.top, 10)
                     
                 // parking info view
-                ParkingInfoView(parkingItem: parkingFinder1.selectedPlace!, showSelectHourView: $showHourSelectionView, selectedHour: $selectedHour).padding(.vertical, 20)
+                ParkingInfoView(parkingItem: parkingFinder.selectedPlace!, showSelectHourView: $showHourSelectionView, selectedHour: $selectedHour).padding(.vertical, 20)
                     // payment view
-                PaymentView(selectedHour: $selectedHour, perHourFee: parkingFinder1.selectedPlace?.fee ?? 0.0).padding(.bottom, 40)
+                PaymentView(selectedHour: $selectedHour, perHourFee: parkingFinder.selectedPlace?.fee ?? 0.0).padding(.bottom, 40)
             }
             .padding()
             .padding(.horizontal, 20)
@@ -73,7 +73,7 @@ struct ParkingDetailView: View {
         withAnimation {
             animate = false
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                parkingFinder1.showDetail = false
+                parkingFinder.showDetail = false
                 translation = 0.0
             }
         }
