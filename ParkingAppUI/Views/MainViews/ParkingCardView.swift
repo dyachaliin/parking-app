@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct ParkingCardView: View {
-    
+    let networkManager: NetworkManager = NetworkManager()
     @EnvironmentObject var parkingFinder: ParkingFinder
-
+              
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 8) {
@@ -25,11 +25,16 @@ struct ParkingCardView: View {
             }
            
             Spacer()
-            Image(parkingFinder.selectedPlace?.icon ?? "")
-                .resizable()
-                .frame(width: 80, height: 80)
-                .scaledToFit()
-                .cornerRadius(15)
+            
+            AsyncImage(url: URL(string: networkManager.getURL(photoReference: parkingFinder.selectedPlace?.photos?.first?.photoReference ?? ""))) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .clipShape(RoundedRectangle(cornerRadius: 15))
+                        .padding()
+                } placeholder: {
+                Text("loading")
+                }
         }
         .padding()
         .frame(height: 150)

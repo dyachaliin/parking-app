@@ -10,9 +10,7 @@ struct ParkingDetailView: View {
     @State var animate = false
     @State var translation: CGFloat = 0.0
     
-//    @Binding var isPresented: Bool
-    
-//    @State var showingDetail = false
+
     @State var isPayed = false
         
     var dragGesture: some Gesture {

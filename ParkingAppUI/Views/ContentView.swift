@@ -104,9 +104,6 @@ struct ContentView: View {
                     }
                     parkingFinder.showDetail = true
                 }
-            //                .transition(.slide)
-            //                .animation(.easeOut(duration: 0.1))
-            // .transition(.move(edge: .bottom))
             
         }
         
@@ -121,12 +118,8 @@ struct ContentView: View {
             Spacer()
             // parking card view
             if parkingFinder.selectedPlace != nil {
-                //                withAnimation(.linear(duration: 1)){
-                //                    bottomCardView
-                //                }
                 bottomCardView
                     .animation(.easeOut(duration: 0.1))
-                
             }
             // search view
             SearchView()

@@ -34,6 +34,7 @@ struct ParkingInfoView: View {
                         withAnimation { showSelectHourView = true }
                     }
             }
+            
         }
         .edgesIgnoringSafeArea(.bottom)
     }

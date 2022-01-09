@@ -45,6 +45,7 @@ struct Result: Codable, Identifiable {
     var hour: String?
     let id = UUID()
     
+    
      
     enum CodingKeys: String, CodingKey {
         case businessStatus = "business_status"

@@ -3,9 +3,9 @@ import Foundation
 import Alamofire
 
 class NetworkManager {
+    let key = "AIzaSyC-6F4go5xJJmNM8_mL_Ihww6ORS6NF0lo"
     func doTask(longitude: Double, latitude: Double, radius: Double, onSuccess: @escaping ([Result])->Void, onFailure: @escaping (String)-> Void)  {
         
-        let key = "AIzaSyC-6F4go5xJJmNM8_mL_Ihww6ORS6NF0lo"
         let urlPath = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(longitude)%2C\(latitude)&radius=\(radius)&type=parking&keyword=parking&key=\(key)"
        // let urlPath1 = "https://uas-api.inrix.com/v1/appToken?appId=zkxa7tgn90&hashToken=emt4YTd0Z245MHxseHEyNGsyVkJJMjlEemNwQlQ3bmQ1NVEzRzFqZmZNNzM1TG9tbTMy"
         AF.request(urlPath).responseDecodable(of: PlacesResult.self) { responseJSON in
@@ -27,6 +27,9 @@ class NetworkManager {
             }
         }
         
+    }
+    func getURL(photoReference: String) -> String{
+        return "https://maps.googleapis.com/maps/api/place/photo?photo_reference=\(photoReference)&key=\(key)&maxwidth=400"
     }
     
 }

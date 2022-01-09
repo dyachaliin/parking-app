@@ -9,17 +9,14 @@ struct PaymentView: View {
     
     var body: some View {
         HStack {
-            //TODO: comments
             Text("$\(String(format: "%.2f", selectedHour/2 * perHourFee))")
                 .font(.system(size: 22, weight: .bold))
                 .foregroundColor(.darkColor)
 
             Spacer()
             Button(action: {
-                //TODO: empty hendler
                 // Tap handler
                 onBack?()
-               
             }, label: {
                 Text("Pay")
                     .font(.system(size: 20, weight: .semibold))
