@@ -9,6 +9,11 @@ struct ParkingDetailView: View {
     @State var selectedHour: CGFloat = 0.0
     @State var animate = false
     @State var translation: CGFloat = 0.0
+    
+//    @Binding var isPresented: Bool
+    
+//    @State var showingDetail = false
+    @State var isPayed = false
         
     var dragGesture: some Gesture {
         DragGesture().onChanged { value in
@@ -18,7 +23,7 @@ struct ParkingDetailView: View {
             if value.translation.height > 100 {
                 closeCard()
             } else {
-                withAnimation { translation = 0.0 }
+                withAnimation { translation = 77 }
             }
         }
     }
@@ -51,13 +56,17 @@ struct ParkingDetailView: View {
                 // parking info view
                 ParkingInfoView(parkingItem: parkingFinder.selectedPlace!, showSelectHourView: $showHourSelectionView, selectedHour: $selectedHour).padding(.vertical, 20)
                     // payment view
-                PaymentView(selectedHour: $selectedHour, perHourFee: parkingFinder.selectedPlace?.fee ?? 0.0).padding(.bottom, 40)
+               
+                PaymentView(selectedHour: $selectedHour, perHourFee: parkingFinder.selectedPlace?.fee ?? 0.0, onBack: {
+                    closeCard()
+                }).padding(.bottom, 40)
+                
+                
             }
             .padding()
             .padding(.horizontal, 20)
             .background(Color.lightColor)
             .cornerRadius(40)
-            .offset(y: animate ? 0 : UIScreen.screenHeight)
             .offset(y: translation)
                 
             if showHourSelectionView {
@@ -65,17 +74,23 @@ struct ParkingDetailView: View {
             }
         }
         .onAppear {
-            withAnimation { animate = true }
+            translation = UIScreen.screenHeight
+            withAnimation {
+                animate = true
+                translation = 77
+            }
+            
         }
     }
     
     func closeCard() {
-        withAnimation {
-            animate = false
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        withAnimation(Animation.easeIn(duration: 0.5)) {
+            animate = true
+            translation = UIScreen.screenHeight
+
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 parkingFinder.showDetail = false
-                translation = 0.0
             }
         }
-    }
 }

@@ -27,7 +27,7 @@ struct ParkingInfoView: View {
             }.font(.system(size: 16))
             
             HStack(spacing: 10) {
-                InfoItemView(imageName: "place", value: parkingItem?.name ?? "", title: "Parking Place")
+                InfoItemView(imageName: "place", value: parkingItem?.placeID ?? "", title: "Parking Place")
                 
                 InfoItemView(imageName: "cost", value: getHour(), title: "Time")
                     .onTapGesture {
@@ -35,6 +35,7 @@ struct ParkingInfoView: View {
                     }
             }
         }
+        .edgesIgnoringSafeArea(.bottom)
     }
     
     func getHour() -> String {
@@ -42,15 +43,5 @@ struct ParkingInfoView: View {
         let hourData = String(format: "%0.0f", hourSeparated.0)
         let minuteData = hourSeparated.1 == 0.0 ? "0" : "30"
         return "\(hourData) h \(minuteData) m"
-    }
-    func randomString() -> String {
-      let letters = "ABCDE"
-      let numbers = "123456789"
-      let newStringL = String((0..<1).map{ _ in letters.randomElement()!
-      })
-      let newStringN = String((0..<1).map{ _ in numbers.randomElement()!
-        })
-        let newString = newStringL + newStringN
-        return newString
     }
 }

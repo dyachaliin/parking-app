@@ -14,13 +14,14 @@ class ContentViewController: ObservableObject {
     @Published var placesOfClosure: [Result] = []
     @Published var result: Result?
     @Published var failedDownloading = false
-    
+    @Published var animateCardView = false
+
 }
 struct ContentView: View {
     
     @EnvironmentObject var controller: ContentViewController
     @EnvironmentObject var parkingFinder: ParkingFinder
-
+    
     var body: some View {
         GeometryReader{ geometry in
             ZStack(alignment: .top) {
@@ -33,9 +34,8 @@ struct ContentView: View {
                         Button(action: {
                             parkingFinder.selectedPlace = spot
                         }, label: {
-                            
                             SpotAnnotatonView(fee: "\(Int(spot.fee ?? 0.0))", selected: spot.id == parkingFinder.selectedPlace?.id)
-
+                            
                         })
                     }
                 }
@@ -43,15 +43,14 @@ struct ContentView: View {
                 .cornerRadius(40)
                 .edgesIgnoringSafeArea(.top)
                 .offset(y: -70)
-                if parkingFinder.selectedPlace != nil {
-                    bottomCardView
-//                        .animation()
-                }
+                
+                screenDetailsView
                 
                 if parkingFinder.showDetail {
                     // parking detail view when click on card
                     ParkingDetailView(parkingFinder: parkingFinder, region: MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: parkingFinder.selectedPlace!.geometry.location.lat, longitude: parkingFinder.selectedPlace!.geometry.location.lng) , span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)))
                 }
+                
                 if controller.isLoading {
                     
                     Group{
@@ -74,11 +73,12 @@ struct ContentView: View {
             
             controller.isLoading = true
             controller.networkManager.doTask(longitude: Constants.foundLogitude, latitude: Constants.foundLatitude, radius: 1500, onSuccess: { results in
-                let temp: [Result] = results.map({ m in
-                    var el = m
-                    el.carLimit = Int.random(in: 10...45)
-                    el.fee = CGFloat.random(in: 1...5)
-                    return el
+                let temp: [Result] = results.map({ result in
+                    var element = result
+                    element.carLimit = Int.random(in: 10...45)
+                    element.fee = CGFloat.random(in: 1...5)
+                    element.placeID = randomString()
+                    return element
                 })
                 controller.isLoading = false
                 controller.placesOfClosure = temp
@@ -95,20 +95,55 @@ struct ContentView: View {
     
     var bottomCardView: some View {
         VStack {
+            ParkingCardView()
+            
+                .offset(y: -25)
+                .onTapGesture {
+                    withAnimation {
+                        controller.animateCardView.toggle()
+                    }
+                    parkingFinder.showDetail = true
+                }
+            //                .transition(.slide)
+            //                .animation(.easeOut(duration: 0.1))
+            // .transition(.move(edge: .bottom))
+            
+        }
+        
+        
+        
+    }
+    
+    var screenDetailsView: some View {
+        VStack {
             // top navigation
             TopNavigationView()
             Spacer()
             // parking card view
-            ParkingCardView()
-                .offset(y: -25)
-                .onTapGesture {
-                    parkingFinder.showDetail = true
-                }
+            if parkingFinder.selectedPlace != nil {
+                //                withAnimation(.linear(duration: 1)){
+                //                    bottomCardView
+                //                }
+                bottomCardView
+                    .animation(.easeOut(duration: 0.1))
+                
+            }
             // search view
             SearchView()
             
         }
         .padding(.horizontal)
+    }
+    
+    func randomString() -> String {
+        let letters = "ABCDE"
+        let numbers = "123456789"
+        let newStringL = String((0..<1).map{ _ in letters.randomElement()!
+        })
+        let newStringN = String((0..<1).map{ _ in numbers.randomElement()!
+        })
+        let newString = newStringL + newStringN
+        return newString
     }
     
 }

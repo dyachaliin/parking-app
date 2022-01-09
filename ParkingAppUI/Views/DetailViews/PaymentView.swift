@@ -5,6 +5,8 @@ struct PaymentView: View {
     @Binding var selectedHour: CGFloat
     let perHourFee: CGFloat
     
+    var onBack: (() -> Void)? = nil
+    
     var body: some View {
         HStack {
             //TODO: comments
@@ -16,6 +18,8 @@ struct PaymentView: View {
             Button(action: {
                 //TODO: empty hendler
                 // Tap handler
+                onBack?()
+               
             }, label: {
                 Text("Pay")
                     .font(.system(size: 20, weight: .semibold))
@@ -26,4 +30,5 @@ struct PaymentView: View {
             })
         }
     }
+
 }

@@ -23,6 +23,7 @@ struct ParkingCardView: View {
                     Text("$\(String.init(format: "%0.2f", parkingFinder.selectedPlace?.fee ?? 0))/h")
                 }
             }
+           
             Spacer()
             Image(parkingFinder.selectedPlace?.icon ?? "")
                 .resizable()
@@ -34,5 +35,6 @@ struct ParkingCardView: View {
         .frame(height: 150)
         .background(Color.white)
         .cornerRadius(40)
+        .transition(.move(edge: .bottom))
     }
 }

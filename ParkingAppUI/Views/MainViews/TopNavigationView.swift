@@ -18,10 +18,10 @@ struct TopNavigationView: View {
                 Image("car")
                 VStack(alignment: .leading, spacing: 2) {
                     Text("My car")
-                        .font(.system(size: 14))
+                        .font(.system(size: 16))
                         .foregroundColor(.gray)
-                    Text("A16591")
-                        .font(.system(size: 17))
+                    Text("AA6554AT")
+                        .font(.system(size: 15))
                         .foregroundColor(.darkColor)
                 }
             }

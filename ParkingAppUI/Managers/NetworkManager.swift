@@ -10,7 +10,7 @@ class NetworkManager {
        // let urlPath1 = "https://uas-api.inrix.com/v1/appToken?appId=zkxa7tgn90&hashToken=emt4YTd0Z245MHxseHEyNGsyVkJJMjlEemNwQlQ3bmQ1NVEzRzFqZmZNNzM1TG9tbTMy"
         AF.request(urlPath).responseDecodable(of: PlacesResult.self) { responseJSON in
             guard let statusCode = responseJSON.response?.statusCode, (responseJSON.error == nil) else {
-                onFailure("dwdwdadwadawd")
+                onFailure("error")
                 return
                 
             }
@@ -20,12 +20,9 @@ class NetworkManager {
             if (200..<300).contains(statusCode) {
                 if let result = responseJSON.value?.results{
                     onSuccess(result)
-                }else{
-                    onFailure("|fffef")
+                } else {
+                    onFailure("error")
                 }
-                
-            } else {
-                onFailure("|32323232")
                 
             }
         }

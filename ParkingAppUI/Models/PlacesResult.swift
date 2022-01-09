@@ -30,7 +30,7 @@ struct Result: Codable, Identifiable {
     let icon: String
     let iconBackgroundColor: String
     let iconMaskBaseURI: String
-    let name, placeID: String
+    var name, placeID: String
     let plusCode: PlusCode
     let rating: Double
     let reference, scope: String
@@ -41,9 +41,6 @@ struct Result: Codable, Identifiable {
     let openingHours: OpeningHours?
     //MARK: custom variables, didn't come from network
     var carLimit: Int?
-//    mutating func setCarLimit(limit: Int){
-//        self.carLimit = limit
-//    }
     var fee: CGFloat?
     var hour: String?
     let id = UUID()
